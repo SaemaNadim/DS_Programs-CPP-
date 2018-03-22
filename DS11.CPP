@@ -1,0 +1,73 @@
+#include<iostream.h>
+#include<conio.h>
+int n,TOP=-1;
+void push(int s[],int x)
+{
+  if(TOP==n-1)
+    cout<<"Stack is full!!!\n";
+  else
+  {
+    TOP=TOP+1;
+    s[TOP]=x;
+  }
+}
+void pop(int s[])
+{
+  int x;
+  if(TOP<0)
+    cout<<"Stack is empty.\n";
+  else
+  {
+    x=s[TOP];
+    TOP=TOP-1;
+    cout<<"The element which is popped is : "<<x<<"\n";
+  }
+}
+void show(int s[])
+{
+ if(TOP==-1)
+  cout<<"Empty stack!!!!!!\n";
+ else
+   {
+     cout<<"The updated stack is :";
+     for(int i=TOP;i>=0;i--)
+     cout<<endl<<s[i];
+     cout<<endl;
+   }
+}
+void main()
+{
+ clrscr();
+ int s[20],ch,x;
+ char c;
+ cout<<"Enter the size of the stack : ";
+ cin>>n;
+do
+ {
+ cout<<"Enter 1 to display the stack\n";
+ cout<<"Enter 2 if you want to push the elements in the stack\n";
+ cout<<"Enter 3 if you want to pop the elements from the stack\n";
+ cin>>ch;
+ if(ch==1)
+ {
+  show(s);
+ }
+ else if(ch==2)
+ {
+   cout<<"Enter the element you want to push: ";
+   cin>>x;
+   push(s,x);
+   show(s);
+ }
+ else if(ch==3)
+ {
+    pop(s);
+    show(s);
+ }
+ else
+  cout<<"Wrong choice!!!\n";
+ cout<<"Do you want to perform more operations?? ";
+ cin>>c;
+} while(c=='y'||c=='Y');
+ getch();
+}

@@ -1,0 +1,85 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<string.h>
+#include"stack.h"
+int icp(char x)
+{
+ if(x=='+'||x=='-')
+ return 1;
+ else if(x=='*'||x=='/')
+ return 3;
+ else if(x=='^')
+ return 6;
+ else
+ return 7;
+}
+int isp(char x)
+{
+ if(x=='+'||x=='-')
+ return 2;
+ else if(x=='*'||x=='/')
+ return 4;
+ else if(x=='^')
+ return 5;
+ else
+ return 0;
+}
+void infix_to_postfix(char e[])
+{
+ char y,s[20];
+ char x;
+ int c=0;
+ strcat(e,"#");
+ push(s,'#');
+ x=e[c++];
+ int a=x;
+ while(x!='#')
+ {
+  if(a>=65&&a<=90||a>=97&&a<=122)
+  cout<<x;
+  else if(x=='(')
+   push(s,x);
+  else if(x==')')
+  {
+   y=pop(s);
+   while(y!='(')
+   {
+    cout<<y;
+    y=pop(s);
+   }
+  }
+  else if(x=='+'||x=='-'||x=='*'||x=='/'||x=='^')
+  {
+   y=pop(s);
+   while(y!='#'&&icp(x)<isp(y))
+   {
+    cout<<y;
+    y=pop(s);
+   }
+  push(s,y);
+  push(s,x);
+  }
+  x=e[c++];
+  a=x;
+ }
+ if(x=='#')
+ {
+  y=pop(s);
+  while(y!='#')
+  {
+   cout<<y;
+   y=pop(s);
+  }
+ }
+}
+void main()
+{
+ clrscr();
+ char e[20];
+ cout<<"\nEnter the infix expression:\n";
+ gets(e);
+ cout<<"After the conversion from infix to postfix:\n";
+ infix_to_postfix(e);
+ getch();
+}

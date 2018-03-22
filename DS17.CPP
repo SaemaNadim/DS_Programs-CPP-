@@ -1,0 +1,97 @@
+#include<iostream.h>
+#include<conio.h>
+struct node
+{
+ int data;
+ node *left;
+ node *right;
+};
+node *root;
+node* insert(node *temp,int x)
+{
+ if(temp==NULL)
+ {
+  temp=new node;
+  temp->data=x;
+  temp->right=NULL;
+  temp->left=NULL;
+ }
+ else if(x<temp->data)
+  temp->left=insert(temp->left,x);
+ else if(x>temp->data)
+  temp->right=insert(temp->right,x);
+  return temp;
+}
+void preorder(node *root)
+{
+ node *t;
+ t=root;
+ if(t==NULL)
+ return;
+ cout<<t->data<<" ";
+ preorder(root->left);
+ preorder(root->right);
+}
+void inorder(node *root)
+{
+ node *t;
+ t=root;
+ if(t==NULL)
+ return;
+ inorder(t->left);
+ cout<<t->data<<" ";
+ inorder(t->right);
+}
+void postorder(node *root)
+{
+ node *t;
+ t=root;
+ if(t==NULL)
+ return;
+ postorder(t->left);
+ postorder(t->right);
+ cout<<t->data<<" ";
+}
+void main()
+{
+ clrscr();
+ int a,x;
+ char ch,chh;
+ cout<<"Let's make a tree\n";
+ do
+   {
+    cout<<"Enter the data\n";
+    cin>>x;
+    root=insert(root,x);
+    cout<<"Do you want to enter more ??\n";
+    cin>>chh;
+   }while(chh=='y'||chh=='Y');
+ do
+ {
+  cout<<"Enter 1 if you want to do preorder traversal\n";
+  cout<<"Enter 2 if you want to do inorder traversal\n";
+  cout<<"Enter 3 if you want to do postorder traversal\n";
+  cin>>a;
+  if(a==1)
+  {
+   cout<<"Preorder Traversal:\n";
+   preorder(root);
+  }
+  else if(a==2)
+  {
+   cout<<"Inorder Traversal:\n";
+   inorder(root);
+  }
+  else if(a==3)
+  {
+   cout<<"Postorder Traversal:\n";
+   postorder(root);
+  }
+  else
+  cout<<"Wrong choice";
+  cout<<"\nDo you want to traverse again???";
+  cin>>ch;
+ }while(ch=='y'||ch=='Y');
+getch();
+}
+
